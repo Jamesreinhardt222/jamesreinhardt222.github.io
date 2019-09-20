@@ -1,2 +1,2 @@
 # jamesreinhardt222.github.io
-WElcome to my repository
+Welcome to my repository
