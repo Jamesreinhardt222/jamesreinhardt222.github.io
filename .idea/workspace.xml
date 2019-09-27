@@ -16,6 +16,7 @@
   <component name="ProjectId" id="1R7VWHbDmklRvZ1HH3XSucRF96b" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/A01162209_1510_assignments" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -40,7 +41,22 @@
       <option name="presentableId" value="Default" />
       <updated>1569018150704</updated>
       <workItem from="1569018153355" duration="2000" />
+      <workItem from="1569106316471" duration="78000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
