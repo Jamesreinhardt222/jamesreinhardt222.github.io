@@ -1,0 +1,87 @@
+<html>"
+<head>
+
+<link href = "css/style.css" rel = "stylesheet" type ="text/css">
+
+
+</head>
+
+<body>
+<h1 id = "instruction"> Click the zombie!</h1>
+<h2 id = "scoreLabel"> score:</h2>
+<h2 id = "scorecounter">0</h2>
+
+<button id ="reset">Reset</button>
+        <audio id ="gunshot" src = src\gunshot.wav></audio>
+        <img id = 'zombie' src = "images/zombiedab1.jpg">
+</body>
+
+        <script>
+            let zombie_alive = true
+            count=0
+            let width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+        
+        let height = window.innerHeight
+        || document.documentElement.clientHeight
+        || document.body.clientHeight;
+        
+            let leftvalue= (Math.random()*(width-document.getElementById("zombie").width));
+            let topvalue= (Math.random()*(height-document.getElementById("zombie").height));
+
+            function reset(){
+            document.getElementById('scorecounter').innerHTML = 0
+            document.getElementById('zombie').style.left = (width/2 - (document.getElementById("zombie").width/2)) +"px";
+            document.getElementById('zombie').style.top = (height/2 - (document.getElementById("zombie").height/2)) + "px";           
+        }
+        
+        document.getElementById('reset').onclick = reset;
+
+    function movement() {
+            let width = window.innerWidth
+            || document.documentElement.clientWidth
+        || document.body.clientWidth;
+        
+            let height = window.innerHeight
+            || document.documentElement.clientHeight
+            || document.body.clientHeight;
+
+            if (zombie_alive){
+                document.getElementById('zombie').style.left = Math.floor(leftvalue) +"px";
+                document.getElementById('zombie').style.top = Math.floor(topvalue) +"px";
+                leftvalue= Math.random()*(width-400);
+                topvalue= Math.random()*(height-250);}
+            }
+
+    function click_to_kill(){
+            zombie_alive = false;
+            document.getElementById("gunshot").play();
+            document.getElementById('zombie').src= "images/blood.png"
+            
+            setTimeout(function(){document.getElementById('zombie').style.visibility = "hidden";}, 600)
+            setTimeout(function(){document.getElementById('zombie').src= "images/zombiedab1.jpg";}, 700)
+            setTimeout(function(){zombie_alive = true;}, 600)
+        
+            setTimeout(function(){document.getElementById('zombie').style.visibility = "visible";}, 2600)
+            count+=1;
+            document.getElementById("scorecounter").innerHTML = count;
+
+    
+        }
+        document.getElementById('zombie').onclick = click_to_kill;
+        
+        if (zombie){
+        setInterval(movement, 1500);
+        }
+        else{
+
+        }
+
+        </script>
+
+   
+
+
+
+</html>
