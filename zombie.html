@@ -30,7 +30,16 @@
             let leftvalue= (Math.random()*(width-document.getElementById("zombie").width));
             let topvalue= (Math.random()*(height-document.getElementById("zombie").height));
 
-            function reset(){
+    function reset(){
+        let zombie_alive = true
+            count=0
+            let width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+        
+        let height = window.innerHeight
+        || document.documentElement.clientHeight
+        || document.body.clientHeight;
             document.getElementById('scorecounter').innerHTML = 0
             document.getElementById('zombie').style.left = (width/2 - (document.getElementById("zombie").width/2)) +"px";
             document.getElementById('zombie').style.top = (height/2 - (document.getElementById("zombie").height/2)) + "px";           
