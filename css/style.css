@@ -1,0 +1,30 @@
+#zombie{
+    position:absolute; 
+    width:200px;
+}
+
+body{
+ background-color: white;
+}
+h1, h2{
+    color:red;
+    font-family:fantasy;
+}
+
+button{
+    position:absolute;
+    left:50%;
+    bottom: 50px;
+}
+
+#instruction{
+text-align: center;
+}
+#scoreLabel{
+    text-align: center;
+}
+#scorecounter{
+    text-align:center;
+}
+
+
