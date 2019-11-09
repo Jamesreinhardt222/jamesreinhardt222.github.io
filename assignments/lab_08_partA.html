@@ -1,0 +1,31 @@
+<html>
+<head>
+
+</head>
+
+<body>
+
+    <script>
+function displayMessage(A){
+    console.log(`Button ${A} was clicked.`)}
+
+        function generateButtons(n){
+            alphabet = [];
+            for(let i = 0; i< 26; i++){
+                alphabet[i]=String.fromCharCode(i+65)
+            }
+            
+            for (let i = 0; i< n; i++){
+                let btn =document.createElement("BUTTON");
+                btn.innerHTML = alphabet[i];
+                btn.id = alphabet[i];
+                document.body.appendChild(btn);
+                btn.onclick = function(){displayMessage(alphabet[i])};
+            } 
+            
+            }
+        generateButtons(26)
+
+    </script>
+</body>
+</html>

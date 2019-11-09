@@ -1,0 +1,28 @@
+<html>
+<head>
+
+</head>
+
+<body>
+<html>
+    <body>
+    <script>
+        function recipe(title, servings, ingredients){
+            this.title = title;
+            this.servings = servings;
+            this.ingredients = ingredients;
+            this.print = function(nOfServings) {
+                document.write(`Title: ${title}` +"<br>", 
+                `Servings: ${nOfServings}`+"<br>", "ingredients:<br>"); 
+
+                    for (let i=0; i < ingredients.length; i++) { 
+                        document.write(ingredients[i] + "<br>");
+                }}
+            }
+        
+        let recipeCake = new recipe("Cake", 2, ['eggs', 'milk', 'sugar'])
+
+        recipeCake.print(3)
+    </script>
+</body>
+</html>
