@@ -16,69 +16,79 @@
         <img id = 'zombie' src = "images/zombiedab1.jpg">
 </body>
 
-        <script>
-            let zombie_alive = true
-            count=0
-            let width = window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
-        
-        let height = window.innerHeight
-        || document.documentElement.clientHeight
-        || document.body.clientHeight;
-        
-            let leftvalue= (Math.random()*(width-document.getElementById("zombie").width));
-            let topvalue= (Math.random()*(height-document.getElementById("zombie").height));
+    <script>
 
+        // Make a variable to make the function cleaner by replacing all the getElementById("zombie") calls.
+        let zombietrait = document.getElementById("zombie")
+
+        // set a boolean to keep track of the zombie's state, if it is alive or not.
+            let zombie_alive = true
+            count=0;
+
+        let width = window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
+        let height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
+
+        zombietrait.style.left = (width/2 - (zombietrait.width/2))+ "px";
+        zombietrait.style.top = (height/2 - (zombietrait.height/2)) + "px";
+
+        let leftvalue= (Math.random()*(width-zombietrait.width));
+        let topvalue= (Math.random()*(height-zombietrait.height));
+
+ // reset the score and set the zombie back to the summer.
     function reset(){
         let zombie_alive = true
             count=0
-            let width = window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
-        
-        let height = window.innerHeight
-        || document.documentElement.clientHeight
-        || document.body.clientHeight;
+
+        // Make sure the function takes into account the size of the browser window
+        let width = window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
+        let height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
+
             document.getElementById('scorecounter').innerHTML = 0
-            document.getElementById('zombie').style.left = (width/2 - (document.getElementById("zombie").width/2)) +"px";
-            document.getElementById('zombie').style.top = (height/2 - (document.getElementById("zombie").height/2)) + "px";           
+            document.getElementById('zombie').style.left = (width/2 - (zombietrait.width/2)) +"px";
+            document.getElementById('zombie').style.top = (height/2 - (zombietrait.height/2)) + "px";           
         }
-        
+        // Makes reset button end the game and bring it back to the initial state when clicked.
         document.getElementById('reset').onclick = reset;
 
+
+        // move the zombie around the map
     function movement() {
-            let width = window.innerWidth
-            || document.documentElement.clientWidth
-        || document.body.clientWidth;
+            let width = window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
         
-            let height = window.innerHeight
-            || document.documentElement.clientHeight
-            || document.body.clientHeight;
+            let height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
 
             if (zombie_alive){
                 document.getElementById('zombie').style.left = Math.floor(leftvalue) +"px";
                 document.getElementById('zombie').style.top = Math.floor(topvalue) +"px";
-                leftvalue= Math.random()*(width-400);
-                topvalue= Math.random()*(height-250);}
+                leftvalue= Math.random()*(width-zombietrait.width);
+                topvalue= Math.random()*(height-zombietrait.height);}
             }
 
+    function click_events(){
+        setTimeout(function(){zombietrait.style.visibility = "hidden";}, 600)
+            setTimeout(function(){zombietrait.src= "images/zombiedab1.jpg";}, 700)
+            setTimeout(function(){zombie_alive = true;}, 600)
+            setTimeout(function(){zombietrait.style.visibility = "visible";}, 2600)
+    }
+    function increase_count(){
+        count+=1;
+            document.getElementById("scorecounter").innerHTML = count;
+    }
+
     function click_to_kill(){
+        if (zombie_alive == false) {
+            return
+        }
             zombie_alive = false;
             document.getElementById("gunshot").play();
             document.getElementById('zombie').src= "images/blood.png"
+            click_events()
             
-            setTimeout(function(){document.getElementById('zombie').style.visibility = "hidden";}, 600)
-            setTimeout(function(){document.getElementById('zombie').src= "images/zombiedab1.jpg";}, 700)
-            setTimeout(function(){zombie_alive = true;}, 600)
-        
-            setTimeout(function(){document.getElementById('zombie').style.visibility = "visible";}, 2600)
-            count+=1;
-            document.getElementById("scorecounter").innerHTML = count;
+           increase_count()
 
     
         }
-        document.getElementById('zombie').onclick = click_to_kill;
+        zombietrait.onclick = click_to_kill;
         
         if (zombie){
         setInterval(movement, 1500);
