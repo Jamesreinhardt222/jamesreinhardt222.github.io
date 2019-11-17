@@ -1,0 +1,121 @@
+<html>
+
+<head>
+<style>
+
+button {
+    position:absolute;
+    height:5em;
+    width: 10em;
+}
+</style>
+</head>
+
+<body>
+    <p>How many buttons?</p>
+
+    <input type="text" id="buttonAmount" value="Enter a number from 5 to 500">
+    <button id="go">Go!</button>
+    <div id="background">
+        <p id="message">should be a message</p>
+    </div>
+    
+
+<script>
+
+let ordertracker = 0
+let buttonlist=[]
+        let message = document.getElementById("message")
+        let backgroundbox = document.getElementById("background")
+        let button = false
+        let number = 1
+
+        function compare(identifier){
+            if (ordertracker < (number-1)){
+                if (identifier == ordertracker){
+                buttonclicked= false
+                ordertracker+=1
+                document.getElementById("message").innerHTML="Correct!"
+                console.log(ordertracker)
+                return
+                
+                }
+                else {
+                    document.getElementById("message").innerHTML="Wrong.  You need to work on your memory."}
+                    ordertracker = 0
+                    console.log(ordertracker)
+                    }
+            else{
+                document.getElementById("message").innerHTML="You guessed the right order.  You must have an excellent memory"
+                }
+            }
+            
+
+        
+
+        function specialbutton(colour, xlocation, ylocation, identifier){
+            this.colour = colour;
+            this.xlocation = xlocation;
+            this.ylocation = ylocation;
+            this.identifier = identifier;
+            this.btn = document.createElement("BUTTON");
+            this.btn.style.background = colour;
+            this.btn.style.left = xlocation + "em";
+            this.btn.style.bottom = ylocation + "em";
+            this.btn.onclick=function(){compare(identifier)}
+            document.body.appendChild(this.btn);
+        }
+
+        function movement() {
+            number = parseInt(document.getElementById("buttonAmount").value)
+            let width = window.innerWidth
+            let height = window.innerHeight
+
+            for (i=0; i<number; i++) {
+            let leftvalue= (Math.random()*(width)-5);
+            let topvalue= ((Math.random()*(height))-5);
+                buttonlist[i].btn.style.left = (Math.floor(leftvalue) +"px");
+                buttonlist[i].btn.style.top = (Math.floor(topvalue) +"px");
+            }
+        }
+            
+        
+        
+    function makebuttonlist(buttonlist, number){
+        let screenwidth = window.innerWidth
+        let screenheight = window.innerHeight
+        let colourlist = ["red", "yellow", "blue", "green", "black", "orange", "purple"]
+        let buttonY = 5;
+        let buttonX = 5;
+
+        for(i = 0; i<number; i++) {
+            let colornumber = Math.floor(Math.random()*(colourlist.length-1))
+            buttoncolour=colourlist[colornumber]
+            let identifier = i
+            let b = new specialbutton(buttoncolour, buttonX, buttonY, identifier)
+                buttonlist.push(b)
+            buttonX+=10
+            colourlist.splice(colornumber, 1)
+            }}
+
+    function createbuttons() {
+        button = true
+        let number = parseInt(document.getElementById("buttonAmount").value);
+        makebuttonlist(buttonlist, number)
+        console.log(buttonlist);
+        if (button){
+    setTimeout(movement, (number +1000));
+    }
+        }
+        
+        document.getElementById("go").onclick = createbuttons;
+    
+    
+        
+
+
+    </script>
+
+</body>
+
+</html>
