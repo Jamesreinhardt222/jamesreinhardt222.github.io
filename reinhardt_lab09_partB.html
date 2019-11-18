@@ -62,7 +62,7 @@ let buttonlist=[]
             this.btn.style.bottom = ylocation + "em";
             this.btn.onclick=function(){compare(identifier)}
             document.body.appendChild(this.btn);
-            this.remove = function(){this.btn.style.display="none"};
+            this.remove = function(){document.body.removeChild(this.btn)};
         }
 
         function movement() {
@@ -98,19 +98,20 @@ let buttonlist=[]
             }}
 
     function createbuttons() {
+        let number = parseInt(document.getElementById("buttonAmount").value);
         if (button){
-        for (i=0; i<number-1; i++){
+        for (i=0; i<buttonlist.length; i++){
             buttonlist[i].remove();
         }}
+        buttonlist=[]
         
         ordertracker = 0;
-        button = true;
-        let number = parseInt(document.getElementById("buttonAmount").value);
-        makebuttonlist(buttonlist, number)
+        button = true
+        makebuttonlist(buttonlist, number);
         console.log(buttonlist);
         if (button){
-    setTimeout(movement, (number +1000));
-    }
+            setTimeout(movement, (number +1000));
+                }
         }
         
         document.getElementById("go").onclick = createbuttons;

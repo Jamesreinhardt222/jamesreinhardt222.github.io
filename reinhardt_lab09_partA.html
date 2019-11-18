@@ -12,10 +12,9 @@ button {
 </head>
 
 <body>
-    <p>How many buttons?</p>
+    <p>Remember the order of buttons</p>
 
     <input type="text" id="buttonAmount" placeholder="Enter a number">
-    
     <div id="background">
         <p id="message"></p>
         <button id="go">Go!</button>
@@ -23,24 +22,47 @@ button {
     
 
 <script>
-
+let button=false
+let ordertracker = 0
 let buttonlist=[]
         let message = document.getElementById("message")
-        let backgroundbox = document.getElementById("background")
-        let button = false
+        let backgroundbox = document.getElementById("background");
         let number = 1
 
-        function specialbutton(colour, xlocation, ylocation){
+        function compare(identifier){
+            if (ordertracker < (number)){
+                if (identifier == ordertracker){
+                    ordertracker+=1
+                    document.getElementById("message").innerHTML="Correct!"
+                    if (ordertracker == (number)){
+                        document.getElementById("message").innerHTML="You guessed the right order.  You must have an excellent memory"
+                         }
+                    else{
+                        return
+                        }
+                        }
+                else {
+                    document.getElementById("message").innerHTML="Wrong.  You need to work on your memory."}
+                    ordertracker = 0
+                    console.log(ordertracker)
+                    }
+            }
+            
+
+        
+
+        function specialbutton(colour, xlocation, ylocation, identifier){
             this.colour = colour;
             this.xlocation = xlocation;
             this.ylocation = ylocation;
-            let btn=document.createElement("BUTTON");
-            this.btn=btn
-                btn.style.background = colour;
-                btn.style.left = xlocation;
-                btn.style.bottom = ylocation;
-            document.body.appendChild(btn);
-            this.remove = function(){this.btn.style.display="none"};
+            this.identifier = identifier;
+            this.btn = document.createElement("BUTTON");
+            this.btn.style.background = colour;
+            this.btn.style.left = xlocation + "px";
+            this.btn.style.bottom = ylocation + "px";
+            this.btn.onclick=function(){compare(identifier)}
+            document.body.appendChild(this.btn);
+            this.remove = function(){document.body.removeChild(this.btn)};
         }
 
         function movement() {
@@ -48,9 +70,9 @@ let buttonlist=[]
             let width = window.innerWidth
             let height = window.innerHeight
 
-            for (i=0; i<number+1; i++) {
-            let leftvalue= Math.random()*(width-80);
-            let topvalue= Math.random()*(height-160);
+            for (i=0; i<number; i++) {
+            let leftvalue= (Math.random()*(width-160));
+            let topvalue= ((Math.random()*(height-80)));
                 buttonlist[i].btn.style.left = (Math.floor(leftvalue) +"px");
                 buttonlist[i].btn.style.top = (Math.floor(topvalue) +"px");
             }
@@ -59,33 +81,37 @@ let buttonlist=[]
         
         
     function makebuttonlist(buttonlist, number){
-        let screenwidth = window.innerWidth;
-        let screenheight = window.innerHeight;
+        let screenwidth = window.innerWidth
+        let screenheight = window.innerHeight
         let colourlist = ["red", "yellow", "blue", "green", "black", "orange", "purple"]
-            
+        
         for(i = 0; i<number; i++) {
-            buttonY = (Math.floor(Math.random()*(screenheight-80)) + "px");
-            buttonX = (Math.floor(Math.random()*(screenwidth-160)) + "px");
-            buttoncolour=colourlist[Math.floor(Math.random()*6)]
-            let b = new specialbutton(buttoncolour, buttonX, buttonY)
-
+            let buttonY = (Math.random()*(screenheight-80));
+            let buttonX = (Math.random()*(screenwidth-160));
+            let colornumber = Math.floor(Math.random()*(colourlist.length-1))
+            buttoncolour=colourlist[colornumber]
+            let identifier = i
+            let b = new specialbutton(buttoncolour, buttonX, buttonY, identifier)
                 buttonlist.push(b)
             }}
 
     function createbuttons() {
+        let number = parseInt(document.getElementById("buttonAmount").value);
         if (button){
-            for (i=0; i<number-1; i++){
+        for (i=0; i<buttonlist.length; i++){
             buttonlist[i].remove();
         }}
+        buttonlist=[]
+        
+        ordertracker = 0;
         button = true
-        let number = parseInt(document.getElementById("buttonAmount").value);
-        makebuttonlist(buttonlist, number)
+        makebuttonlist(buttonlist, number);
         console.log(buttonlist);
         if (button){
             setInterval(movement, 2000);
-    }
+                }
         }
-    
+        
         document.getElementById("go").onclick = createbuttons;
     
     
