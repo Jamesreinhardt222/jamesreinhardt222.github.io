@@ -14,10 +14,11 @@ button {
 <body>
     <p>How many buttons?</p>
 
-    <input type="text" id="buttonAmount" value="Enter a number from 5 to 500">
-    <button id="go">Go!</button>
+    <input type="text" id="buttonAmount" placeholder="Enter a number">
+    
     <div id="background">
         <p id="message"></p>
+        <button id="go">Go!</button>
     </div>
     
 
@@ -39,6 +40,7 @@ let buttonlist=[]
                 btn.style.left = xlocation;
                 btn.style.bottom = ylocation;
             document.body.appendChild(btn);
+            this.remove = function(){this.btn.style.display="none"};
         }
 
         function movement() {
@@ -47,8 +49,8 @@ let buttonlist=[]
             let height = window.innerHeight
 
             for (i=0; i<number+1; i++) {
-            let leftvalue= Math.random()*(width);
-            let topvalue= Math.random()*(height);
+            let leftvalue= Math.random()*(width-80);
+            let topvalue= Math.random()*(height-160);
                 buttonlist[i].btn.style.left = (Math.floor(leftvalue) +"px");
                 buttonlist[i].btn.style.top = (Math.floor(topvalue) +"px");
             }
@@ -57,13 +59,13 @@ let buttonlist=[]
         
         
     function makebuttonlist(buttonlist, number){
-        let screenwidth = window.innerWidth
-        let screenheight = window.innerHeight
+        let screenwidth = window.innerWidth;
+        let screenheight = window.innerHeight;
         let colourlist = ["red", "yellow", "blue", "green", "black", "orange", "purple"]
             
         for(i = 0; i<number; i++) {
-            buttonY = (Math.floor(Math.random()*screenheight) + "px");
-            buttonX = (Math.floor(Math.random()*screenwidth) + "px");
+            buttonY = (Math.floor(Math.random()*(screenheight-80)) + "px");
+            buttonX = (Math.floor(Math.random()*(screenwidth-160)) + "px");
             buttoncolour=colourlist[Math.floor(Math.random()*6)]
             let b = new specialbutton(buttoncolour, buttonX, buttonY)
 
@@ -71,6 +73,10 @@ let buttonlist=[]
             }}
 
     function createbuttons() {
+        if (button){
+            for (i=0; i<number-1; i++){
+            buttonlist[i].remove();
+        }}
         button = true
         let number = parseInt(document.getElementById("buttonAmount").value);
         makebuttonlist(buttonlist, number)

@@ -12,42 +12,40 @@ button {
 </head>
 
 <body>
-    <p>How many buttons?</p>
+    <p>Remember the order of buttons</p>
 
-    <input type="text" id="buttonAmount" value="Enter a number from 5 to 500">
-    <button id="go">Go!</button>
+    <input type="text" id="buttonAmount" placeholder="Enter a number">
     <div id="background">
-        <p id="message">should be a message</p>
+        <p id="message"></p>
+        <button id="go">Go!</button>
     </div>
     
 
 <script>
-
+let button=false
 let ordertracker = 0
 let buttonlist=[]
         let message = document.getElementById("message")
-        let backgroundbox = document.getElementById("background")
-        let button = false
+        let backgroundbox = document.getElementById("background");
         let number = 1
 
         function compare(identifier){
-            if (ordertracker < (number-1)){
+            if (ordertracker < (number)){
                 if (identifier == ordertracker){
-                buttonclicked= false
-                ordertracker+=1
-                document.getElementById("message").innerHTML="Correct!"
-                console.log(ordertracker)
-                return
-                
-                }
+                    ordertracker+=1
+                    document.getElementById("message").innerHTML="Correct!"
+                    if (ordertracker == (number)){
+                        document.getElementById("message").innerHTML="You guessed the right order.  You must have an excellent memory"
+                         }
+                    else{
+                        return
+                        }
+                        }
                 else {
                     document.getElementById("message").innerHTML="Wrong.  You need to work on your memory."}
                     ordertracker = 0
                     console.log(ordertracker)
                     }
-            else{
-                document.getElementById("message").innerHTML="You guessed the right order.  You must have an excellent memory"
-                }
             }
             
 
@@ -64,6 +62,7 @@ let buttonlist=[]
             this.btn.style.bottom = ylocation + "em";
             this.btn.onclick=function(){compare(identifier)}
             document.body.appendChild(this.btn);
+            this.remove = function(){this.btn.style.display="none"};
         }
 
         function movement() {
@@ -72,8 +71,8 @@ let buttonlist=[]
             let height = window.innerHeight
 
             for (i=0; i<number; i++) {
-            let leftvalue= (Math.random()*(width)-5);
-            let topvalue= ((Math.random()*(height))-5);
+            let leftvalue= (Math.random()*(width-160));
+            let topvalue= ((Math.random()*(height-80)));
                 buttonlist[i].btn.style.left = (Math.floor(leftvalue) +"px");
                 buttonlist[i].btn.style.top = (Math.floor(topvalue) +"px");
             }
@@ -99,7 +98,13 @@ let buttonlist=[]
             }}
 
     function createbuttons() {
-        button = true
+        if (button){
+        for (i=0; i<number-1; i++){
+            buttonlist[i].remove();
+        }}
+        
+        ordertracker = 0;
+        button = true;
         let number = parseInt(document.getElementById("buttonAmount").value);
         makebuttonlist(buttonlist, number)
         console.log(buttonlist);
