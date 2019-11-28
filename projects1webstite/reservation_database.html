@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBECUHL-yOTcomNKBzCKhCIOqHhpq_5GCM",
+    authDomain: "group-3-project-56961.firebaseapp.com",
+    databaseURL: "https://group-3-project-56961.firebaseio.com",
+    projectId: "group-3-project-56961",
+    storageBucket: "group-3-project-56961.appspot.com",
+    messagingSenderId: "643841198597",
+    appId: "1:643841198597:web:7c2f7a816d596e2478aa6c"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  //reference to firestore db
+  var db = firebase.firestore();
+</script>
+
+
+
+</head>
+
+<body>
+
+  <h1> let's read from database: <span id="data">...</span></h1>
+  <script>
+   var reservationsRef = db.collection("reservations");
+
+reservationsRef.doc("Earl's").collection("individualReservations").doc("People").set({
+    Name: "James", NumberOfPeople: 3,
+     dateOfRedervation: ["November", 11, 2019], time: "7:00 pm",
+    contactNumber: 2508889999 });
+reservationsRef.doc("Papa John's").collection("individualReservations").doc("People").set({
+    Name: "Bill", NumberOfPeople: 4, dateOfRedervation: ["November", 11, 2019]
+    contactNumber: 2503338888, time: "8:00 pm" });
+reservationsRef.doc("Giovanni's").collection("individualReservations").doc("People").set({
+    Name: ["Washington, D.C."], NumberOfPeople: [null], dateOfRedervation: ["USA"],
+    contactNumber: [true], time:"3:00 pm" });
+reservationsRef.doc("Poke Funtime").collection("individualReservations").doc("People").set({
+    Name: ["Tokyo"], NumberOfPeople: null, dateOfRedervation: ["Japan"],
+    contactNumber: [true], time: [9000000],
+    breakfasts: ["kanto", "honshu"] });
+reservationsRef.doc("Super Steakhouse").collection("individualReservations").doc("People").set({
+    Name: ["Beijing"], NumberOfPeople: [null], dateOfRedervation: ["China"],
+    contactNumber: [true], time: [21500000],
+    breakfasts: ["jingjinji", "hebei"] });
+
+    var docRef = db.collection("menu_selection").doc("Earl's");
+    docRef.get().then(function(doc){
+      if (doc.exists){
+        console.log("Document data:", doc.data())
+      }else{
+        console.log("No such document!");
+      }
+    }).catch(function(error){
+      console.log("Error getting document:", error)
+    })
+
+    db.collection("menu_selection").where("contactNumber", "==", true)
+    .get()
+    .then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        console.log(doc.id,"=>",doc.data());
+      });
+    })
+    .catch(function(error){
+      console.log("Error getting documents: ", error)
+    });
+db.collection("menu_selection").doc("BJ")
+.onSnapshot(function (c) {
+  document.getElementById("data").innerHTML = c.data().Name;
+});
+  </script>
+
+
+</body>
+
+</html>
