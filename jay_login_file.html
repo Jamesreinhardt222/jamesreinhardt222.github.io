@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <style>
+    h1{
+        color:red
+    }
+    </style>
+    <body>
+
+<h1>
+    Yay you signed in!!
+</h1>
+</body>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login page</title>
+
+</head>
+<body>
+
+
+	<!-- The surrounding HTML is left untouched by FirebaseUI.
+     Your app may use that space for branding, controls and other customizations.-->
+  <h1>Welcome to Jbros Restaurant app</h1>
+  <div id="firebaseui-auth-container"></div>
+  <div id="loader">Loading...</div>
+<!-- 
+  <h1>let's read from database: <span id=data>....</span></h1> -->
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCENQ_98AjAccmfXsB2Kzfy-D_V3QvkN-M",
+    authDomain: "project-authentication-f841b.firebaseapp.com",
+    databaseURL: "https://project-authentication-f841b.firebaseio.com",
+    projectId: "project-authentication-f841b",
+    storageBucket: "project-authentication-f841b.appspot.com",
+    messagingSenderId: "541548160482",
+    appId: "1:541548160482:web:91a33581cbdf8b6048c5bb"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+<script>
+	// Initialize the FirebaseUI Widget using Firebase.
+	var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  // initialize firebase
+  var db = firebase.firestore();
+</script>
+
+
+
+<script>
+	var uiConfig = {
+  callbacks: {
+    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+      // User successfully signed in.
+      // Return type determines whether we continue the redirect automatically
+      // or whether we leave that to developer to handle.
+      return true;
+    },
+    uiShown: function() {
+      // The widget is rendered.
+      // Hide the loader.
+      document.getElementById('loader').style.display = 'none';
+    }
+  },
+  // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+  signInFlow: 'popup',
+  signInSuccessUrl: '<url-to-redirect-to-on-success>',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.EmailAuthProvider.PROVIDER_ID
+  ],
+  // Terms of service url.
+  tosUrl: '<your-tos-url>',
+  // Privacy policy url.
+  privacyPolicyUrl: '<your-privacy-policy-url>'
+};
+	// The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+
+<h1>Your table total: $<span id=data>...</span></h1>
+<form id="ReservationForm"action>
+	<div>
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name"><br>
+
+		<label for="guests">Number of guests:</label>
+		<input type="text" id="guests" name="guests"><br>
+
+    <label for="time">Time: </label>
+    <input id="time" type="time" name="appt-time"><br>
+
+		<label for="name">Date:</label>
+		<input type="text" id="date" data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date" value="09-01-2013"><br>
+
+		<br><input type="submit" value="Submit">
+	<div>
+<script>
+	let winePrice = db.collection("Menu").doc("Menu_Cactus").collection("Menu").doc("Drink").get().then(function (e) {
+			document.getElementById("data").innerHTML = e.data().Sake + e.data().Wine}); 
+
+    document.getElementById('ReservationForm').addEventListener('submit', processReservation)
+
+      function processReservation(e) {
+        e.preventDefault();
+        let reservationName = document.getElementById('name').value
+        let reservationGuests = document.getElementById('guests').value
+        let reservationDate = document.getElementById('date').value
+        let reservationTime = document.getElementById('time').value
+        db.collection("Restaurants").doc("CactusBurnarby").collection("Reservations").add({
+        Guests: reservationGuests,
+        Name: reservationName,
+        Time: reservationTime,
+        Date: reservationDate,
+    })
+  }
+  </script>
+</body>
+</html> 

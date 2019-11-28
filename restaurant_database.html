@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBECUHL-yOTcomNKBzCKhCIOqHhpq_5GCM",
+    authDomain: "group-3-project-56961.firebaseapp.com",
+    databaseURL: "https://group-3-project-56961.firebaseio.com",
+    projectId: "group-3-project-56961",
+    storageBucket: "group-3-project-56961.appspot.com",
+    messagingSenderId: "643841198597",
+    appId: "1:643841198597:web:7c2f7a816d596e2478aa6c"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  //reference to firestore db
+  var db = firebase.firestore();
+</script>
+
+
+
+</head>
+
+<body>
+
+  <h1> let's read from database: <span id="data">...</span></h1>
+  <script>
+   var menusRef = db.collection("menus");
+
+menusRef.doc("Earl's").set({
+    entrees: ["Chicken Dinner", "Steak", "Calamari"], sidesAndSalads: ["Ceasar", "Garden"],
+     Beverages: ["Pop", "Juice", "Wine"],
+    Desserts: ["Chocolate Cake", "Ice Cream"], childMenu: ["Kid's burger", "Fish and Chips"],
+    breakfasts: ["Egg benedict", "Toast"] });
+menusRef.doc("Papa John's").set({
+    entrees: ["Los Angeles"], sidesAndSalads: ["CA"], Beverages: ["USA"],
+    Desserts: [false], childMenu: [3900000],
+    breakfasts: ["west_coast", "socal"] });
+menusRef.doc("Giovanni's").set({
+    entrees: ["Washington, D.C."], sidesAndSalads: [null], Beverages: ["USA"],
+    Desserts: [true], childMenu: [680000],
+    breakfasts: ["east_coast"] });
+menusRef.doc("Poke Funtime").set({
+    entrees: ["Tokyo"], sidesAndSalads: null, Beverages: ["Japan"],
+    Desserts: [true], childMenu: [9000000],
+    breakfasts: ["kanto", "honshu"] });
+menusRef.doc("Super Steakhouse").set({
+    entrees: ["Beijing"], sidesAndSalads: [null], Beverages: ["China"],
+    Desserts: [true], childMenu: [21500000],
+    breakfasts: ["jingjinji", "hebei"] });
+
+    // var docRef = db.collection("menu_selection").doc("SF");
+    // docRef.get().then(function(doc){
+    //   if (doc.exists){
+    //     console.log("Document data:", doc.data())
+    //   }else{
+    //     console.log("No such document!");
+    //   }
+    // }).catch(function(error){
+    //   console.log("Error getting document:", error)
+    // })
+
+    db.collection("menu_selection").where("Desserts", "==", true)
+    .get()
+    .then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        console.log(doc.id,"=>",doc.data());
+      });
+    })
+    .catch(function(error){
+      console.log("Error getting documents: ", error)
+    });
+db.collection("menu_selection").doc("BJ")
+.onSnapshot(function (c) {
+  document.getElementById("data").innerHTML = c.data().entrees;
+});
+  </script>
+
+
+</body>
+
+</html>
