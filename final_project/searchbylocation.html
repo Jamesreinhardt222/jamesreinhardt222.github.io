@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Search by location</title>
+
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+        <script src="scripts/firebase_setup.js"></script>
+
+
+            <!-- Making sure it's mobile friendly -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <style>
+            
+          h1 {
+            text-align:center;
+            color: rgb(112, 10, 10)
+          }
+          #location {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translate(-50%, -50%)
+          }
+          body{
+            background-color: #A57171;
+          }
+          .pill-color{
+            background-color: white;
+          }
+
+        </style>
+
+          <div style="background:rgb(112, 10, 10)">
+            <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="signedin.html">Homepage</a>
+                    </li>
+                    <li class="nav-item dropdown pill-color">
+                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Find your restaurant</a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="searchbylocation.html">By location</a>
+                        <a class="dropdown-item" href="searchbyname.html">By name</a>
+                        <a class="dropdown-item" href="searchallrestaurants.html">See all restaurants</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="reservation.html">Reserve a table</a>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link pill-color" href="syncyourtable.html">Sync your table</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link active" href="login.html">Sign in</a>
+                          </li>
+                  </ul>
+
+                </div>
+
+    </head>
+
+    <body>
+
+        <h1>Search by location</h1>
+<div>
+        <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="location">
+              Choose your location
+            </button>
+            <div class="dropdown-menu">
+              <ul id = "cafe-list"></ul>
+              <!-- <a class="dropdown-item" href="vancouver.html">Vancouver</a>
+              <a class="dropdown-item" href="burnaby.html">Burnaby</a>
+              <a class="dropdown-item" href="richmond.html">Richmond</a> -->
+            </div>
+        </div>
+      </div>        
+         
+
+
+  <div class = restaurant-table>
+  <table id = "restaurant-list" style = "display: block">  
+              </table>
+            </div>
+          
+<script>
+    // Your web app's Firebase configuration
+              var firebaseConfig = {
+                apiKey: "AIzaSyAB-vxtLDcfQKj1Noull03LSW0UqDG5cfw",
+                authDomain: "learning-firestore-bab37.firebaseapp.com",
+                databaseURL: "https://learning-firestore-bab37.firebaseio.com",
+                projectId: "learning-firestore-bab37",
+                storageBucket: "learning-firestore-bab37.appspot.com",
+                messagingSenderId: "10298250754",
+                appId: "1:10298250754:web:2b3e2235e38845e4b3391b",
+                measurementId: "G-K40KBCH65H"
+              };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          const db = firebase.firestore()
+      
+  </script>
+    <script src="scripts/location_lookup.js"></script>
+    </body>
