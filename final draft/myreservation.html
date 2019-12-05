@@ -1,0 +1,148 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Confirmation</title>
+
+    <!-- Making sure it's mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <div style="background:rgb(112, 10, 10)">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="index.html">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="find.html">Find your restaurant</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="yourreservation.html">My reservation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="index.html">Sign Out</a>
+            </li>
+        </ul>
+    </div>
+</head>
+
+
+<body>
+
+    <h1>Your reservation information</h1>
+
+
+    <table class="reciept">
+        <tr>
+        </tr>
+        <td>Name</td>
+        <td>
+            <p id='para1'>
+        </td>
+        </p>
+        </tr>
+
+        <tr>
+            <td>
+                <p>Number of Guests:</p>
+            </td>
+            <td>
+                <p id='para2'></p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <p>Reservation Date</p>
+            </td>
+            <td>
+                <p id='para3'></p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <p>Reservation Time</p>
+            </td>
+            <td>
+                <p id='para4'></p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <p>Phone Number</p>
+            </td>
+            <td>
+                <p id='para5'></p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <p>Your Requests</p>
+            </td>
+            <td>
+                <p id='para6'></p>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+    <div class="outer">
+        <a href="signedin.html">
+            <div class=signinbutton>
+                <p class="signin">Back to the Main Page</p>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        var name = localStorage.getItem("name")
+        var guest = localStorage.getItem("guests")
+        var date = localStorage.getItem("date")
+        var time = localStorage.getItem("time")
+        var phone = localStorage.getItem("phone")
+        var req = localStorage.getItem("req")
+        var para1 = document.getElementById('para1')
+        var node1 = document.createTextNode(name);
+        var node2 = document.createTextNode(guest);
+        var node3 = document.createTextNode(date);
+        var node4 = document.createTextNode(time);
+        var node5 = document.createTextNode(phone);
+        var node6 = document.createTextNode(req);
+        var node7 = document.createElement("br")
+        var node8 = document.createElement("br")
+        var node9 = document.createElement("br")
+        var node10 = document.createElement("br")
+        var node11 = document.createElement("br")
+
+
+
+        para1.appendChild(node1)
+        para2.appendChild(node2)
+        para3.appendChild(node3)
+        para4.appendChild(node4)
+        para5.appendChild(node5)
+        para6.appendChild(node6)
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

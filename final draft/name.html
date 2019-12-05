@@ -1,0 +1,102 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search Restaurant by Name</title>
+
+    <!-- Making sure it's mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <div style="background:rgb(112, 10, 10)">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="index.html">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="find.html">Find your restaurant</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="yourreservation.html">My reservation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="index.html">Sign Out</a>
+            </li>
+        </ul>
+    </div>
+
+
+
+</head>
+
+<body>
+
+    <div class="outer">
+        <h1>Search Restaurant by Name</h1>
+    </div>
+
+
+
+    <div id='Board'>
+        <table id='board'>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+            </tr>
+        </table>
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyCENQ_98AjAccmfXsB2Kzfy-D_V3QvkN-M",
+                authDomain: "project-authentication-f841b.firebaseapp.com",
+                databaseURL: "https://project-authentication-f841b.firebaseio.com",
+                projectId: "project-authentication-f841b",
+                storageBucket: "project-authentication-f841b.appspot.com",
+                messagingSenderId: "541548160482",
+                appId: "1:541548160482:web:91a33581cbdf8b6048c5bb"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            // initialize firebase
+            var db = firebase.firestore();
+        </script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+        <script>
+            function filterByName() {
+                document.getElementById('board').innerHTML = '<tr><th>Name</th><th>Area</th></tr>';
+
+
+                db.collection("Restaurants").orderBy("Name", "desc").get().then((snapshot) => {
+                    snapshot.forEach((doc) => {
+                        let RestName = doc.data().Name;
+                        let url = "reservationform.html?" + RestName;
+                        document.getElementById('board').innerHTML += '<tr>' +
+                            '<td id=' + RestName + '>' + `<a href=${url}>` + doc.data().Name + '</button>' + '</td>' +
+                            '<td>' + doc.data().Area + '</td>' +
+                            '</tr>';
+                    })
+                })
+            }
+            filterByName()
+        </script>
+</body>
+
+</html>
