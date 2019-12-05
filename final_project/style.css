@@ -5,7 +5,7 @@
     }
     h2{
         text-align: center;
-        color: white;
+        color:  rgb(112, 10, 10);
     }
   
   
@@ -83,9 +83,7 @@
   center{
     margin: 0 auto;
   }
-  .restaurant-table{
-  
-  }
+ 
   .timebox{
     position: relative;
     width: 244px;
@@ -244,6 +242,7 @@
   color: #FFFFFF;
   }
   .formdiv{
+    position: absolute;
     margin-left: 50px;
   }
   
@@ -262,3 +261,9 @@
   #restaurant-list{
     width: 500px;
   }
+  
+#ReservationForm {
+  left: 40%;
+  top: 60%;
+  position: relative;
+}

@@ -16,20 +16,34 @@
 
     <div style="background:rgb(112, 10, 10)">
         <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="index.html">Homepage</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="find.html">Find your restaurant</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="yourreservation.html">My reservation</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="index.html">Sign Out</a>
-            </li>
-        </ul>
-    </div>
+                <li class="nav-item">
+                  <a class="nav-link active" href="index.html">Homepage</a>
+                </li>
+                <li class="nav-item dropdown pill-color logged-in" style = "display:none;">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Find your restaurant</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="location.html">By location</a>
+                    <a class="dropdown-item" href="name.html">By name</a>
+                    <div class="dropdown-divider"></div>
+                  </div>
+                </li>
+                <li class="nav-item logged-in" style = display:none>
+                  <a class="nav-link pill-color" href="syncyourtable.html">Sync your table</a>
+                </li>
+  
+                      <li class="nav-item logged-in" style="display: none;">
+                        <a href="table_details.html" class="grey-text modal-trigger nav-link pill-color">Account</a>
+                      </li>
+                      <li class="nav-item logged-in" style="display: none;">
+                        <a href="index" class="grey-text nav-link pill-color" id="logout">Logout</a>
+                      </li>
+                      <li class="nav-item logged-out" style="display: none;">
+                        <a href="login.html" class="grey-text modal-trigger nav-item nav-link active">Sign in</a>
+                      </li>
+                    
+              </ul>
+  
+            </div>
 
 
 </head>
@@ -66,10 +80,9 @@
         var db = firebase.firestore();
     </script>
 
-    <h1>Reservation Form</h1><br>
-    <h1>for</h1>
+    <h1>Reservation Form for</h1>
     <h1 id="restname"></h1>
-    <div class = "formdiv">
+    <div class = "reservation">
             <form id="ReservationForm"action="thankyou.html">
               <label for="name">Name:</label>
               <input type="text" id="name"  class = "form-control" name="name"><br>
@@ -138,6 +151,103 @@
             window.open('myreservation.html')
         }
     </script>
+
+<!-- add to class for signup to create pop-up
+  data-target="modal-signup" -->
+       <!-- SIGN UP MODAL -->
+       <div id="modal-signup" class="modal">
+        <div class="modal-content">
+          <h4>Sign up</h4><br />
+          <form id="signup-form">
+            <div class="input-field">
+              <input type="email" id="signup-email" required />
+              <label for="signup-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signup-password" required />
+              <label for="signup-password">Choose password</label>
+            </div>
+            <div class="input-field">
+              <input type="text" id="signup-bio" required />
+              <label for="signup-bio">One Line Bio</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+          </form>
+        </div>
+      </div>
+    
+      <!-- LOGIN MODAL -->
+      <div id="modal-login" class="modal">
+        <div class="modal-content">
+          <h4>Login</h4><br />
+          <form id="login-form">
+            <div class="input-field">
+              <input type="email" id="login-email" required />
+              <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="login-password" required />
+              <label for="login-password">Your password</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Login</button>
+          </form>
+        </div>
+      </div>
+      <!-- ACCOUNT MODAL -->
+      <div id="modal-account" class="modal">
+        <div class="modal-content center-align">
+          <h4>Account details</h4><br />
+          <div class="account-details"></div>
+        </div>
+      </div>
+    
+        <!-- CREATE GUIDE MODAL -->
+        <div id="modal-create" class="modal" style="display:none">
+          <div class="modal-content">
+            <h4>Create Guide</h4><br />
+            <form id="create-form">
+              <div class="input-field">
+                <input type="text" id="title" required>
+                <label for="title">Guide Title</label>
+              </div>
+              <div class="input-field">
+                <textarea id="content" class="materialize-textarea" required></textarea>
+                <label for="content">Guide Content</label>
+              </div>
+              <button class="btn yellow darken-2 z-depth-0">Create</button>
+            </form>
+          </div>
+        </div>
+        <!-- GUIDE LIST -->
+        <div class="container" style="margin-top: 40px;" style="display:none;">
+          <ul class="collapsible z-depth-0 guides" style="display: none;">
+          </ul>
+        </div>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCENQ_98AjAccmfXsB2Kzfy-D_V3QvkN-M",
+          authDomain: "project-authentication-f841b.firebaseapp.com",
+          databaseURL: "https://project-authentication-f841b.firebaseio.com",
+          projectId: "project-authentication-f841b",
+          storageBucket: "project-authentication-f841b.appspot.com",
+          messagingSenderId: "541548160482",
+          appId: "1:541548160482:web:91a33581cbdf8b6048c5bb"
+  };
+  firebase.initializeApp(config);
+  
+  // make auth and firestore references
+  const auth = firebase.auth();
+  // update firestore settings
+</script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="scripts/auth.js"></script>
+<script src="scripts/index.js"></script>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
