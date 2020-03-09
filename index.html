@@ -1,56 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>James' Page</title>
-</head>
-<body>
-    <h1>My Embarrassingly simple website.</h1>
-    <aside>But sometimes less is more</aside>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<h2>Who am I?</h2>
-<ul>
-    <li>BCIT Computer Systems Technology Student.</li>
-    <li>Raised in a small town on vancouver island.</li>
-    <li>love ice cream.</li>
-</ul>
+    <!-- font awesome -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"
+    ></script>
 
-<h2>What do I bring to the table?</h2>
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Welcome To My Portfolio</title>
+  </head>
 
-<ul>
-    <li>Strong writing skills</li>
-    <li>Object-oriented programming with java</li>
-    <li>Procedural programming with C and Python</li>
-    <li>Database manipulation with SQL and firebase</li>
-    <li>Bootstrap, css, and javascript</li>
-    <li>Teaching myself React and Mongo DB via Udemy</li>
-</ul>
+  <body id="bg-img">
+    <header>
+      <div class="menu-btn">
+        <div class="btn-line"></div>
+        <div class="btn-line"></div>
+        <div class="btn-line"></div>
+      </div>
 
-<h2>Why am I valuable?</h2>
-<p>I like to challenge old ways of thinking and bring in new ideas to make everything more efficient.
-</p>
+      <nav class="menu">
+        <div class="menu-branding">
+          <div class="portrait"></div>
+        </div>
+        <ul class="menu-nav">
+          <li class="nav-item current">
+            <a href="index.html" class="nav-link">
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link">
+              About Me
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="work.html" class="nav-link">
+              My Work
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="contact.html" class="nav-link">
+              How To Reach Me
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
+    <main class="unique" id="home">
+      <h1 class="lg-heading">
+        James <span class="text-secondary"> Reinhardt</span>
+      </h1>
+      <h2 class="sm-heading">
+        Software Developer, Programmer, & Lifelong Learner
+      </h2>
+      <div class="icons">
+        <a href="#!">
+          <i class="fab fa-twitter fa-2x"></i>
+        </a>
+        <a href="#!">
+          <i class="fab fa-facebook fa-2x"></i>
+        </a>
+        <a href="#!">
+          <i class="fab fa-linkedin fa-2x"></i>
+        </a>
+      </div>
+    </main>
 
-<h2>Projects</h2>
-<p>I'm going to make an actual website with images and links to my projects, but for now I'll just provide descriptions.</p>
-<ul>
-    <li>Single user text-based dungeon adventure game</li>
-    <li>Hangman Game</li>
-    <li>Shoot the zombie!!</li>
-    <li>Java aquatic ecosystem simulation</li>
-</ul>
-
-<h2>My back-story</h2>
-<p>Every hero needs an origin story.</p>
-<p>I graduated from the university of Victoria with a degree in Biopsychology.  I wanted to go into medical school, so I tried to be really well
-    rounded, taking extra courses in philosophy, biochemistry, and genetics.
-</p>
-<p>After voluneering in a hospital and a psych ward, I decided the medical route wasn't for me.  I wanted something less depressing and more creative.
-</p>
-<p>I worked in a homeless shelter for a bit, and that was a crazy experience.  I learned a lot about how cruel life can be.</p>
-<h2>Blue Coast Research</h2>
-<p>My first taste of software engineering was at BlueCoast Research.</p>
-    
-</body>
+    <script src="js/main.js"></script>
+  </body>
 </html>
